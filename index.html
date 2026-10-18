@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS // Next-Gen Cyber Arcade & Gaming Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="cyber-theme">
+  <!-- Interactive Cyber Particles Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Glowing Cursor Follower -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Audio Control Floating Bar -->
+  <aside class="audio-widget" title="Toggle Sound Effects & Music">
+    <button id="sfxToggleBtn" class="audio-btn" aria-label="Toggle Sound Effects">
+      <i class="fa-solid fa-volume-high"></i>
+      <span class="audio-status">SFX: ON</span>
+    </button>
+  </aside>
+
+  <!-- Top Navigation Header -->
+  <header class="cyber-header" id="navbar">
+    <div class="header-container">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo">
+        <div class="logo-glitch-wrapper">
+          <span class="logo-icon"><i class="fa-solid fa-gamepad"></i></span>
+          <span class="logo-text">NEXUS<span class="accent-text">//</span>ARCADE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="#arcade-section" class="nav-link"><i class="fa-solid fa-dice-d20"></i> Play Arcade</a></li>
+          <li><a href="#games-catalog" class="nav-link"><i class="fa-solid fa-layer-group"></i> Catalog</a></li>
+          <li><a href="#tournaments" class="nav-link"><i class="fa-solid fa-trophy"></i> Tournaments</a></li>
+          <li><a href="#leaderboard" class="nav-link"><i class="fa-solid fa-ranking-star"></i> Rank</a></li>
+          <li><a href="#community" class="nav-link"><i class="fa-solid fa-newspaper"></i> Intel</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="header-actions">
+        <!-- Live Players Pill -->
+        <div class="live-pill" title="Current Players Online">
+          <span class="pulsing-dot"></span>
+          <span id="liveCounter">14,892</span> ONLINE
+        </div>
+
+        <!-- Wishlist Button -->
+        <button class="icon-btn" id="wishlistHeaderBtn" title="Your Saved Games">
+          <i class="fa-solid fa-heart"></i>
+          <span class="badge" id="wishlistCount">0</span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <button class="profile-pill-btn" id="profileBtn" title="View Gamer Profile">
+          <div class="avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&auto=format&fit=crop&q=80" alt="Avatar" id="userAvatarImg">
+            <span class="avatar-rank">99</span>
+          </div>
+          <div class="profile-info-mini">
+            <span class="gamer-tag" id="navGamerTag">CYBER_PHANTOM</span>
+            <div class="xp-bar-mini"><div class="xp-fill-mini" style="width: 78%;"></div></div>
+          </div>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrap -->
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-backdrop"></div>
+      <div class="hero-grid-lines"></div>
+
+      <div class="hero-container">
+        <!-- Hero Left Column: Intro -->
+        <div class="hero-content">
+          <div class="cyber-badge">
+            <i class="fa-solid fa-bolt"></i> SEASON 04 // REVOLUTION
+          </div>
+          <h1 class="hero-title">
+            ENTER THE <span class="gradient-neon">NEXT REALM</span> OF GAMING.
+          </h1>
+          <p class="hero-desc">
+            Play zero-latency web games directly in your browser, compete in global cyber tournaments, conquer competitive leaderboards, and discover AAA-tier indie showcases.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#arcade-section" class="btn btn-primary cyber-cut-btn play-arcade-cta">
+              <i class="fa-solid fa-play"></i> PLAY ARCADE NOW
+            </a>
+            <button class="btn btn-secondary cyber-cut-btn" id="watchTrailerBtn">
+              <i class="fa-solid fa-circle-play"></i> WATCH SHOWREEL
+            </button>
+          </div>
+
+          <!-- Quick Stats Banner -->
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-num" id="statGames">250+</span>
+              <span class="stat-lbl">CURATED TITLES</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-num">$120K</span>
+              <span class="stat-lbl">PRIZE POOL</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-num">0.8ms</span>
+              <span class="stat-lbl">CANVAS LATENCY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: 3D Holographic Showcase Card -->
+        <div class="hero-showcase">
+          <div class="holo-card" id="holoCard">
+            <div class="holo-glare"></div>
+            <div class="holo-tag">FEATURED SPOTLIGHT</div>
+            <div class="holo-img-wrap">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80" alt="Cyber Horizon">
+              <div class="holo-overlay">
+                <span class="game-genre-pill">SCI-FI FPS</span>
+                <span class="game-rating"><i class="fa-solid fa-star"></i> 4.9</span>
+              </div>
+            </div>
+            <div class="holo-body">
+              <h3 class="holo-title">CYBER HORIZON: 2099</h3>
+              <p class="holo-meta">Raytraced combat in neo-Tokyo megastructures. Team tactical battle royale.</p>
+              <div class="holo-actions">
+                <button class="btn btn-sm btn-primary launch-hero-game" data-game="shooter">
+                  <i class="fa-solid fa-crosshairs"></i> QUICK PLAY
+                </button>
+                <button class="btn btn-sm btn-ghost open-details-btn" data-id="game-1">
+                  DETAILS <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE PLAYABLE ARCADE SECTION (Canvas Games built-in) -->
+    <section class="section arcade-section" id="arcade-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="cyber-subtitle"><i class="fa-solid fa-microchip"></i> ZERO INSTALLATION NEEDED</span>
+            <h2 class="section-title">BUILT-IN <span class="gradient-text">BROWSER ARCADE</span></h2>
+          </div>
+          <p class="section-desc">
+            Instantly play custom HTML5 canvas arcade games right here. High scores are automatically logged to the leaderboards!
+          </p>
+        </div>
+
+        <!-- Arcade Game Tabs -->
+        <div class="arcade-selector">
+          <button class="arcade-tab active" data-game="shooter">
+            <i class="fa-solid fa-rocket"></i>
+            <span>CYBER STRIKE</span>
+            <small>Space Shooter</small>
+          </button>
+          <button class="arcade-tab" data-game="snake">
+            <i class="fa-solid fa-dragon"></i>
+            <span>NEON SNAKE 2088</span>
+            <small>Cyber Grid</small>
+          </button>
+          <button class="arcade-tab" data-game="reflex">
+            <i class="fa-solid fa-stopwatch"></i>
+            <span>CHRONO REFLEX</span>
+            <small>Reaction Tester</small>
+          </button>
+        </div>
+
+        <!-- Arcade Main Stage / Console -->
+        <div class="arcade-stage-container">
+          <div class="arcade-cabinet">
+            <!-- Screen Header Info -->
+            <div class="cabinet-top-bar">
+              <div class="status-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+              </div>
+              <div class="active-game-name" id="activeGameTitle">CYBER STRIKE // SECTOR 7</div>
+              <div class="cabinet-controls">
+                <button id="arcadeRestartBtn" class="cab-btn" title="Restart Game"><i class="fa-solid fa-rotate-right"></i></button>
+                <button id="arcadePauseBtn" class="cab-btn" title="Pause Game"><i class="fa-solid fa-pause"></i></button>
+                <button id="arcadeFullscreenBtn" class="cab-btn" title="Fullscreen Mode"><i class="fa-solid fa-expand"></i></button>
+              </div>
+            </div>
+
+            <!-- Arcade Canvas Screen Area -->
+            <div class="arcade-screen-wrap" id="arcadeScreenWrap">
+              <canvas id="arcadeCanvas" width="900" height="520"></canvas>
+              
+              <!-- Start / Overlay Screen -->
+              <div class="arcade-overlay" id="arcadeOverlay">
+                <div class="overlay-content">
+                  <div class="overlay-icon" id="overlayIcon"><i class="fa-solid fa-gamepad"></i></div>
+                  <h3 id="overlayTitle">READY PLAYER ONE?</h3>
+                  <p id="overlayInstructions">Use Arrow Keys / WASD to fly. SPACEBAR to fire plasma cannons.</p>
+                  <div class="score-summary" id="scoreSummary" style="display: none;">
+                    <span class="final-score-lbl">FINAL SCORE</span>
+                    <span class="final-score-val" id="finalScoreVal">0000</span>
+                  </div>
+                  <button class="btn btn-primary cyber-cut-btn" id="startArcadeGameBtn">
+                    <i class="fa-solid fa-play"></i> START ENGINE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Screen HUD / Controls Guide Below Canvas -->
+            <div class="cabinet-footer">
+              <div class="hud-item">
+                <span class="hud-label">CURRENT SCORE</span>
+                <span class="hud-value neon-glow" id="hudScore">0000</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-label">HIGH SCORE</span>
+                <span class="hud-value" id="hudHighScore">0000</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-label">MULTIPLIER</span>
+                <span class="hud-value" id="hudMultiplier">x1.0</span>
+              </div>
+              <div class="hud-instructions" id="hudControlsText">
+                <kbd>W/A/S/D</kbd> or <kbd>Arrows</kbd> to Move &bull; <kbd>SPACE</kbd> to Shoot
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES STORE & EXPLORER CATALOG -->
+    <section class="section catalog-section" id="games-catalog">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="cyber-subtitle"><i class="fa-solid fa-compass"></i> DISCOVER & PLAY</span>
+            <h2 class="section-title">TRENDING <span class="gradient-text">TITLES</span></h2>
+          </div>
+
+          <!-- Search & Filter Controls -->
+          <div class="catalog-filters-bar">
+            <!-- Search Input -->
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="gameSearchInput" placeholder="Search title, genre, publisher...">
+              <button id="clearSearchBtn" class="clear-search" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="genre-filter-pills" id="genreFilterGroup">
+              <button class="filter-pill active" data-genre="all">ALL</button>
+              <button class="filter-pill" data-genre="Action">ACTION</button>
+              <button class="filter-pill" data-genre="Sci-Fi">SCI-FI</button>
+              <button class="filter-pill" data-genre="Racing">RACING</button>
+              <button class="filter-pill" data-genre="RPG">RPG</button>
+              <button class="filter-pill" data-genre="Arcade">ARCADE</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Games Grid (Rendered dynamically via app.js) -->
+        <div class="games-grid" id="gamesGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE TOURNAMENTS & PRIZE POOLS -->
+    <section class="section tournaments-section" id="tournaments">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="cyber-subtitle"><i class="fa-solid fa-trophy"></i> ESPORTS ARENA</span>
+            <h2 class="section-title">ACTIVE <span class="gradient-text">TOURNAMENTS</span></h2>
+          </div>
+          <p class="section-desc">Join ranked seasonal tournaments, defeat global contenders, and claim crypto/cash bounties.</p>
+        </div>
+
+        <div class="tournaments-grid">
+          <!-- Tournament Card 1 -->
+          <div class="tournament-card live-card">
+            <div class="card-status-badge live"><span class="pulsing-dot"></span> LIVE NOW</div>
+            <div class="tourney-img-wrap">
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80" alt="Cyber Apex">
+            </div>
+            <div class="tourney-body">
+              <div class="tourney-prize">
+                <span class="prize-label">PRIZE POOL</span>
+                <span class="prize-amt">$50,000 USD</span>
+              </div>
+              <h3 class="tourney-title">CYBER APEX: WORLD CHAMPIONSHIP</h3>
+              <p class="tourney-meta"><i class="fa-solid fa-gamepad"></i> 5v5 Tactical FPS &bull; Double Elimination</p>
+              
+              <div class="tourney-slots">
+                <div class="slots-header">
+                  <span>Registered Squads</span>
+                  <span>124 / 128</span>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill" style="width: 96%;"></div>
+                </div>
+              </div>
+
+              <div class="tourney-footer">
+                <div class="countdown-clock" data-end="12">
+                  <i class="fa-regular fa-clock"></i> Closes in: <span class="time-left">04h 28m</span>
+                </div>
+                <button class="btn btn-sm btn-primary join-tourney-btn" data-tourney="Cyber Apex">
+                  REGISTER TEAM
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tournament Card 2 -->
+          <div class="tournament-card">
+            <div class="card-status-badge upcoming"><i class="fa-solid fa-calendar"></i> UPCOMING</div>
+            <div class="tourney-img-wrap">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80" alt="Neon Drift">
+            </div>
+            <div class="tourney-body">
+              <div class="tourney-prize">
+                <span class="prize-label">PRIZE POOL</span>
+                <span class="prize-amt">$25,000 USD</span>
+              </div>
+              <h3 class="tourney-title">HYPER SPEEDWAY GRAND PRIX</h3>
+              <p class="tourney-meta"><i class="fa-solid fa-car-side"></i> Zero-G Neon Racing &bull; Time Trials</p>
+
+              <div class="tourney-slots">
+                <div class="slots-header">
+                  <span>Registered Drivers</span>
+                  <span>420 / 500</span>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill" style="width: 84%;"></div>
+                </div>
+              </div>
+
+              <div class="tourney-footer">
+                <div class="countdown-clock" data-end="48">
+                  <i class="fa-regular fa-clock"></i> Starts in: <span class="time-left">2d 11h</span>
+                </div>
+                <button class="btn btn-sm btn-secondary join-tourney-btn" data-tourney="Hyper Speedway">
+                  JOIN BRACKET
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tournament Card 3 -->
+          <div class="tournament-card">
+            <div class="card-status-badge upcoming"><i class="fa-solid fa-calendar"></i> UPCOMING</div>
+            <div class="tourney-img-wrap">
+              <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80" alt="Shadow Samurai">
+            </div>
+            <div class="tourney-body">
+              <div class="tourney-prize">
+                <span class="prize-label">PRIZE POOL</span>
+                <span class="prize-amt">$15,000 USD</span>
+              </div>
+              <h3 class="tourney-title">BLADE MASTERS: 1v1 DUELS</h3>
+              <p class="tourney-meta"><i class="fa-solid fa-shield-halved"></i> Cyber Melee &bull; Best of 5</p>
+
+              <div class="tourney-slots">
+                <div class="slots-header">
+                  <span>Registered Fighters</span>
+                  <span>64 / 64</span>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill full" style="width: 100%;"></div>
+                </div>
+              </div>
+
+              <div class="tourney-footer">
+                <div class="countdown-clock">
+                  <i class="fa-solid fa-lock"></i> Roster Locked
+                </div>
+                <button class="btn btn-sm btn-ghost" disabled>
+                  BRACKET FULL
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOBAL LEADERBOARDS -->
+    <section class="section leaderboard-section" id="leaderboard">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="cyber-subtitle"><i class="fa-solid fa-crown"></i> HALL OF LEGENDS</span>
+            <h2 class="section-title">GLOBAL <span class="gradient-text">RANKINGS</span></h2>
+          </div>
+          <div class="leaderboard-tabs">
+            <button class="rank-tab active" data-board="weekly">THIS WEEK</button>
+            <button class="rank-tab" data-board="alltime">ALL TIME</button>
+          </div>
+        </div>
+
+        <div class="leaderboard-container">
+          <!-- Top 3 Podium Cards -->
+          <div class="podium-grid">
+            <!-- Rank 2 -->
+            <div class="podium-card rank-2">
+              <div class="podium-crown silver"><i class="fa-solid fa-award"></i> #2</div>
+              <div class="podium-avatar">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80" alt="Player 2">
+              </div>
+              <h4 class="podium-name">V01D_WALKER</h4>
+              <span class="podium-score">984,320 PTS</span>
+              <span class="podium-tag">98.2% WINRATE</span>
+            </div>
+
+            <!-- Rank 1 (Tallest) -->
+            <div class="podium-card rank-1">
+              <div class="podium-crown gold"><i class="fa-solid fa-crown"></i> #1 CHAMPION</div>
+              <div class="podium-avatar">
+                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=120&auto=format&fit=crop&q=80" alt="Player 1">
+              </div>
+              <h4 class="podium-name">NEON_K4TANA</h4>
+              <span class="podium-score">1,245,190 PTS</span>
+              <span class="podium-tag highlight">GRAND MASTER</span>
+            </div>
+
+            <!-- Rank 3 -->
+            <div class="podium-card rank-3">
+              <div class="podium-crown bronze"><i class="fa-solid fa-medal"></i> #3</div>
+              <div class="podium-avatar">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80" alt="Player 3">
+              </div>
+              <h4 class="podium-name">AURA_GLITCH</h4>
+              <span class="podium-score">892,750 PTS</span>
+              <span class="podium-tag">94.7% WINRATE</span>
+            </div>
+          </div>
+
+          <!-- Extended Table (Ranks 4-10) -->
+          <div class="leaderboard-table-wrap">
+            <table class="cyber-table">
+              <thead>
+                <tr>
+                  <th>RANK</th>
+                  <th>PLAYER</th>
+                  <th>PREFERRED TITLE</th>
+                  <th>WIN RATE</th>
+                  <th>TOTAL SCORE</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTbody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEL & GAMING NEWS -->
+    <section class="section news-section" id="community">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="cyber-subtitle"><i class="fa-solid fa-satellite-dish"></i> TRANSMISSIONS</span>
+            <h2 class="section-title">GAMING <span class="gradient-text">INTEL & PATCHES</span></h2>
+          </div>
+        </div>
+
+        <div class="news-grid">
+          <!-- News Article 1 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80" alt="Patch 4.2">
+              <span class="news-badge">DEV LOG</span>
+            </div>
+            <div class="news-content">
+              <span class="news-date">OCTOBER 18, 2026 &bull; 4 MIN READ</span>
+              <h3 class="news-title">Cyber Strike Patch 4.2: Hyper Lasers & Boss Battles</h3>
+              <p class="news-excerpt">Introducing modular plasma weapons, asteroid physics refactor, and improved 144hz web canvas frame pacing.</p>
+              <a href="#arcade-section" class="read-more-link">READ NOTES <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- News Article 2 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=600&auto=format&fit=crop&q=80" alt="Hardware Setup">
+              <span class="news-badge hardware">HARDWARE</span>
+            </div>
+            <div class="news-content">
+              <span class="news-date">OCTOBER 15, 2026 &bull; 6 MIN READ</span>
+              <h3 class="news-title">Optimizing Browser Hardware Acceleration for Pro Play</h3>
+              <p class="news-excerpt">How to configure WebGL flags and sub-millisecond input queues for maximum competitive advantage.</p>
+              <a href="#" class="read-more-link">READ GUIDE <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- News Article 3 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=600&auto=format&fit=crop&q=80" alt="Community Spotlight">
+              <span class="news-badge esports">ESPORTS</span>
+            </div>
+            <div class="news-content">
+              <span class="news-date">OCTOBER 12, 2026 &bull; 3 MIN READ</span>
+              <h3 class="news-title">Team Synapse Dominates Asian Regional Qualifiers</h3>
+              <p class="news-excerpt">Flawless 3-0 sweep against reigning champions locks their spot in the Tokyo Grand Arena Invitational.</p>
+              <a href="#tournaments" class="read-more-link">VIEW STANDINGS <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER / JOIN SQUAD CTA -->
+    <section class="section squad-join-section">
+      <div class="section-container">
+        <div class="squad-box">
+          <div class="squad-glow"></div>
+          <div class="squad-content">
+            <div class="cyber-badge"><i class="fa-solid fa-user-plus"></i> JOIN 500,000+ PILOTS</div>
+            <h2 class="squad-title">READY TO LEVEL UP YOUR SKILLS?</h2>
+            <p class="squad-desc">Subscribe to weekly secret drop codes, tournament invites, and early access beta keys.</p>
+            <form class="squad-form" id="newsletterForm">
+              <div class="input-wrap">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="newsletterEmail" placeholder="pilot_tag@nexus.gg" required>
+              </div>
+              <button type="submit" class="btn btn-primary cyber-cut-btn">
+                CLAIM LOOT DROP
+              </button>
+            </form>
+            <div id="newsletterSuccess" class="form-success" style="display: none;">
+              <i class="fa-solid fa-circle-check"></i> TRANSMISSION RECEIVED! Check your comms link.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="cyber-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">NEXUS<span class="accent-text">//</span>ARCADE</div>
+          <p class="footer-desc">
+            The next-generation competitive arcade portal. High-performance gaming, zero latency, limitless fun.
+          </p>
+          <div class="social-links">
+            <a href="https://discord.com" target="_blank" rel="noopener" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://twitch.tv" target="_blank" rel="noopener" aria-label="Twitch"><i class="fa-brands fa-twitch"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>EXPLORE</h4>
+          <ul>
+            <li><a href="#hero">Featured Realm</a></li>
+            <li><a href="#arcade-section">Play Space Shooter</a></li>
+            <li><a href="#arcade-section">Play Neon Snake</a></li>
+            <li><a href="#arcade-section">Chrono Reflex</a></li>
+            <li><a href="#games-catalog">All 250+ Games</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>COMPETITIVE</h4>
+          <ul>
+            <li><a href="#tournaments">Active Tournaments</a></li>
+            <li><a href="#leaderboard">Weekly Rankings</a></li>
+            <li><a href="#leaderboard">All-Time Legends</a></li>
+            <li><a href="#community">Patch Notes</a></li>
+            <li><a href="#">Rules & Fairplay</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>SYSTEM SPECS</h4>
+          <div class="specs-mini">
+            <div><span>FRAME RATE:</span> <strong>60 - 144 FPS</strong></div>
+            <div><span>RENDERER:</span> <strong>HTML5 CANVAS / 2D</strong></div>
+            <div><span>AUDIO:</span> <strong>SYNTH WEBAUDIO</strong></div>
+            <div><span>STORAGE:</span> <strong>LOCAL STORAGE V2</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 NEXUS GAMING INC. ALL RIGHTS RESERVED. CODED WITH PURE HTML5, CSS3 & MODERN JAVASCRIPT.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Protocol</a>
+          <span>&bull;</span>
+          <a href="#">Terms of Engagement</a>
+          <span>&bull;</span>
+          <a href="#">Security Audit</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Game Details Modal -->
+  <div class="modal-backdrop" id="gameModal">
+    <div class="cyber-modal">
+      <button class="modal-close-btn" id="closeGameModal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-banner" id="modalBanner">
+        <img src="" alt="" id="modalImg">
+        <div class="modal-badge-group">
+          <span class="genre-pill" id="modalGenre">ACTION</span>
+          <span class="rating-pill" id="modalRating"><i class="fa-solid fa-star"></i> 4.9</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-head">
+          <h2 class="modal-title" id="modalTitle">Game Title</h2>
+          <span class="modal-price" id="modalPrice">FREE TO PLAY</span>
+        </div>
+        <p class="modal-desc" id="modalDesc">Detailed description of the game...</p>
+
+        <div class="modal-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">DEVELOPER</span>
+            <span class="meta-val" id="modalDev">Quantum Studios</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">RELEASE DATE</span>
+            <span class="meta-val" id="modalRelease">2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">PLATFORMS</span>
+            <span class="meta-val"><i class="fa-brands fa-chrome"></i> Web, Windows, Mac</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">COMMUNITY</span>
+            <span class="meta-val" id="modalPlayers">24K Active</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary cyber-cut-btn" id="modalPlayBtn">
+            <i class="fa-solid fa-gamepad"></i> LAUNCH GAME
+          </button>
+          <button class="btn btn-secondary" id="modalWishlistBtn">
+            <i class="fa-regular fa-heart"></i> ADD TO WISHLIST
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Trailer Showreel Modal -->
+  <div class="modal-backdrop" id="trailerModal">
+    <div class="cyber-modal video-modal">
+      <button class="modal-close-btn" id="closeTrailerModal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="video-container">
+        <div class="simulated-trailer">
+          <div class="trailer-screen">
+            <div class="scanlines"></div>
+            <div class="cinematic-hud">
+              <span class="rec-dot"></span> LIVE SHOWREEL // 4K 120FPS
+            </div>
+            <div class="cinematic-center">
+              <i class="fa-solid fa-play-circle trailer-big-icon"></i>
+              <h3>NEXUS GAMING WORLD SHOWCASE</h3>
+              <p>Experience ultra-responsive arcade gameplay with custom Web Audio sound synthesis.</p>
+              <button class="btn btn-primary cyber-cut-btn jump-to-arcade-btn">
+                PLAY IN BROWSER NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Profile Modal -->
+  <div class="modal-backdrop" id="profileModal">
+    <div class="cyber-modal profile-modal-card">
+      <button class="modal-close-btn" id="closeProfileModal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="profile-header-banner">
+        <div class="avatar-large-wrap">
+          <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&auto=format&fit=crop&q=80" alt="Avatar" id="modalAvatarImg">
+          <button class="avatar-change-btn" id="changeAvatarBtn" title="Change Avatar"><i class="fa-solid fa-camera"></i></button>
+        </div>
+      </div>
+      <div class="profile-content">
+        <div class="profile-name-edit">
+          <input type="text" id="profileNameInput" value="CYBER_PHANTOM" maxlength="16">
+          <button class="btn btn-sm btn-ghost" id="saveProfileBtn"><i class="fa-solid fa-check"></i> SAVE</button>
+        </div>
+        <span class="profile-tier-badge"><i class="fa-solid fa-shield-cat"></i> ELITE TIER PILOT</span>
+
+        <div class="stats-row">
+          <div class="profile-stat-box">
+            <span class="s-val" id="profileTotalScore">24,580</span>
+            <span class="s-lbl">TOTAL SCORE</span>
+          </div>
+          <div class="profile-stat-box">
+            <span class="s-val" id="profileGamesPlayed">48</span>
+            <span class="s-lbl">GAMES PLAYED</span>
+          </div>
+          <div class="profile-stat-box">
+            <span class="s-val" id="profileRankBadge">#42</span>
+            <span class="s-lbl">GLOBAL RANK</span>
+          </div>
+        </div>
+
+        <h4 class="achievements-title"><i class="fa-solid fa-medal"></i> EARNED ACHIEVEMENTS</h4>
+        <div class="achievements-list">
+          <div class="badge-item unlocked" title="First Blood: Won your first match">
+            <i class="fa-solid fa-crosshairs"></i>
+            <span>First Blood</span>
+          </div>
+          <div class="badge-item unlocked" title="Neon Master: 1,000+ points in Snake">
+            <i class="fa-solid fa-dragon"></i>
+            <span>Neon Master</span>
+          </div>
+          <div class="badge-item unlocked" title="Laser Ace: 50+ kills in Cyber Strike">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Laser Ace</span>
+          </div>
+          <div class="badge-item locked" title="God Reflex: Under 180ms in Chrono Reflex">
+            <i class="fa-solid fa-bolt"></i>
+            <span>God Reflex</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer Modal -->
+  <div class="modal-backdrop" id="wishlistModal">
+    <div class="cyber-modal drawer-modal">
+      <button class="modal-close-btn" id="closeWishlistModal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="drawer-header">
+        <h3><i class="fa-solid fa-heart"></i> SAVED FAVORITES</h3>
+        <span class="drawer-count" id="drawerWishlistCount">0 items</span>
+      </div>
+      <div class="drawer-list" id="wishlistItemsList">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <!-- Audio Synthesizer (Zero External Dependencies) -->
+  <script src="js/audio.js"></script>
+  <!-- Background Particles -->
+  <script src="js/particles.js"></script>
+  <!-- Mini Arcade Games -->
+  <script src="js/games/spaceShooter.js"></script>
+  <script src="js/games/neonSnake.js"></script>
+  <script src="js/games/cyberReflex.js"></script>
+  <!-- Main Application Orchestrator -->
+  <script src="js/app.js"></script>
+</body>
+</html>
